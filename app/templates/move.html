@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<h1>{{ ingredient.name }} の入出庫</h1><p>現在庫: {{ ingredient.stock_milli|quantity }} {{ ingredient.unit }}</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label>区分 <select name="direction"><option value="in">入庫</option><option value="out">出庫</option></select></label>
+<label>数量 ({{ ingredient.unit }}) <input name="quantity" type="number" min="0.001" max="999999999" step="0.001" required></label>
+<label>理由 <input name="reason" maxlength="240" required></label><button>記録</button></form>
+{% endblock %}

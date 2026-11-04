@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% block content %}
+<h1>材料一覧</h1>
+<table><thead><tr><th>材料</th><th>現在庫</th><th>最低在庫</th><th>状態</th><th>操作</th></tr></thead><tbody>
+{% for item in ingredients %}<tr><td>{{ item.name }}</td><td>{{ item.stock_milli|quantity }} {{ item.unit }}</td><td>{{ item.minimum_milli|quantity }} {{ item.unit }}</td>
+<td>{% if item.stock_milli <= item.minimum_milli %}<span class="warning">不足</span>{% else %}通常{% endif %}</td>
+<td><a href="{{ url_for('move', ingredient_id=item.id) }}">入出庫</a> · <a href="{{ url_for('history', ingredient_id=item.id) }}">履歴</a>
+{% if current_user.role == 'admin' %} · <a href="{{ url_for('ingredient_edit', ingredient_id=item.id) }}">編集</a>{% endif %}</td></tr>{% else %}<tr><td colspan="5">材料はありません。</td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

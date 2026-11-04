@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% block content %}
+<h1>ユーザー登録</h1>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<label>ユーザー名 <input name="username" maxlength="80" required></label>
+<label>パスワード (12文字以上) <input name="password" type="password" minlength="12" required></label>
+<label>権限 <select name="role"><option value="staff">在庫担当者</option><option value="admin">管理者</option></select></label>
+<button>登録</button></form>
+{% endblock %}

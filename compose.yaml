@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: cafe_local
+      POSTGRES_USER: cafe_local
+      POSTGRES_PASSWORD: local_dummy_password
+    volumes:
+      - cafe_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cafe_local -d cafe_local"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  web:
+    build: .
+    environment:
+      APP_ENV: development
+      APP_SECRET_KEY: dev-only-change-me
+      DATABASE_URL: postgresql+psycopg://cafe_local:local_dummy_password@db:5432/cafe_local
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  cafe_pg_data:

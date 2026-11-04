@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<h1>{{ ingredient.name }} の履歴</h1>
+<table><thead><tr><th>日時 (UTC)</th><th>増減</th><th>理由</th><th>担当者</th></tr></thead><tbody>
+{% for entry in movements %}<tr><td>{{ entry.created_at }}</td><td>{{ entry.delta_milli|quantity }} {{ ingredient.unit }}</td><td>{{ entry.reason }}</td><td>{{ entry.actor.username }}</td></tr>
+{% else %}<tr><td colspan="4">履歴はありません。</td></tr>{% endfor %}
+</tbody></table><p>最新200件を表示します。</p>
+{% endblock %}
