@@ -46,3 +46,5 @@ Docker が使える環境なら `docker compose up --build` の後、`docker com
 ## 運用上の未対応事項
 
 本番マイグレーション、DB バックアップ、通知、GitHub 側の必須検査・承認、実際の Codex Hook 起動確認は次フェーズです。`init-db` は初期テーブル作成専用であり、既存 DB のスキーマ変更には使いません。パスワードの再設定、アカウント無効化、監査履歴のページ送りも未対応です。
+
+<!-- Phase 3-F disposable branch protection experiment; do not merge. -->
